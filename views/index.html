@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>N-Queens Visualizer | Premium Puzzle Solver</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="container">
+      <h1><i class="fas fa-chess-queen"></i> N-Queens Visualizer</h1>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="control-panel">
+      <div class="input-group">
+        <label for="nInput">Board Size (N):</label>
+        <div class="input-with-buttons">
+          <input type="number" id="nInput" min="1" max="12" value="8" required>
+          <button id="decrementN"><i class="fas fa-minus"></i></button>
+          <button id="incrementN"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button id="solveBtn" class="btn-primary">
+          <i class="fas fa-play"></i> Solve
+        </button>
+        <button id="resetBtn" class="btn-secondary">
+          <i class="fas fa-redo"></i> Reset
+        </button>
+      </div>
+
+      <div class="solution-nav hidden">
+        <button id="prevSolution"><i class="fas fa-chevron-left"></i></button>
+        <span id="solutionCounter">Solution 1/92</span>
+        <button id="nextSolution"><i class="fas fa-chevron-right"></i></button>
+      </div>
+
+      <div class="stats">
+        <div class="stat-card">
+          <i class="fas fa-clock"></i>
+          <span id="time">0.00</span> ms
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-th"></i>
+          <span id="solutionCount">0</span> solutions
+        </div>
+      </div>
+    </section>
+
+    <section class="visualization">
+      <div id="board" class="chessboard"></div>
+    </section>
+  </main>
+
+  <script src="/js/visualizer.js"></script>
+</body>
+</html>
