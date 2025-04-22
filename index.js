@@ -1,24 +1,27 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const serverless = require('serverless-http'); // Add this
 const app = express();
-const solverRouter = require('./routes/solver');  // Make sure the path is correct
+const solverRouter = require('./routes/solver');
 
-// Middleware for parsing JSON and URL encoded data
+// Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Serve static files from the "public" folder
-app.use(express.static('public')); 
-
-// Serve the index.html for the root path
+// Static files and routes
+app.use(express.static('public'));
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/views/index.html');  // Send index.html for GET /
+  res.sendFile(__dirname + '/views/index.html');
 });
-
-// Use the solver router for POST requests to '/solve'
 app.use('/', solverRouter);
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// Export for Vercel
+module.exports.handler = serverless(app);
+
+// Keep this for local development
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
